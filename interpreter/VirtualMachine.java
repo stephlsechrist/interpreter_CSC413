@@ -9,9 +9,13 @@ public class VirtualMachine {
     private Program program;
     private int pc;
     private boolean isRunning;
+    private boolean dumpState; // dump method should be in RunTimeStack
 
     protected VirtualMachine(Program program) {
         this.program = program;
+    }
+
+    public void executeProgram(){
     }
 
 }

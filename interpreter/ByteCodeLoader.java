@@ -4,11 +4,14 @@ package interpreter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 
 public class ByteCodeLoader extends Object {
 
     private BufferedReader byteSource;
+    private StringTokenizer tokenizer;
+    private static final String DELIMITERS = " ";
     
     /**
      * Constructor Simply creates a buffered reader.
@@ -27,7 +30,22 @@ public class ByteCodeLoader extends Object {
      *      Parse any additional arguments for the given ByteCode and send them to
      *      the newly created ByteCode instance via the init function.
      */
-    public Program loadCodes() {
-       return null;
+
+    public Program loadCodes() throws IOException{
+        String token = this.byteSource.readLine();
+        this.tokenizer = new StringTokenizer(token, DELIMITERS, false);
+
+//        while there are lines in file
+        while(token != null){
+//            while there are tokens in line, create instance of ByteCode class
+//            and save arguments to ArrayList<String>
+            while(this.tokenizer.hasMoreTokens()) {
+                String currByteCode = CodeTable.getClassName(token);
+                // see CodeTable section for more code?
+                // do something
+            }
+            token = this.byteSource.readLine();
+        }
+        return null;
     }
 }
