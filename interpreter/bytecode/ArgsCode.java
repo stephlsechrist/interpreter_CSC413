@@ -1,9 +1,16 @@
 package interpreter.bytecode;
 
+import interpreter.VirtualMachine;
+
 import java.util.ArrayList;
 
 public class ArgsCode extends ByteCode {
-    public ByteCode init(ArrayList<String>){
+    @Override
+    public ByteCode init(ArrayList<String> arguments){
         return null;
+    }
+
+    @Override
+    public void execute(VirtualMachine vm){
     }
 }

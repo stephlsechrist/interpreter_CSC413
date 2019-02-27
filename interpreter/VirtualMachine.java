@@ -8,7 +8,7 @@ public class VirtualMachine {
     private Stack returnAddrs;
     private Program program;
     private int pc;
-    private boolean isRunning;
+    private boolean isRunning; // set false by HALT
     private boolean dumpState; // dump method should be in RunTimeStack
 
     protected VirtualMachine(Program program) {
