@@ -16,10 +16,9 @@ public abstract class ByteCode {
 //        return null;
 //    }
 
+    public
 
     public abstract void execute(VirtualMachine vm);
 
     public abstract ByteCode init(ArrayList<String> arguments);
-
-
 }

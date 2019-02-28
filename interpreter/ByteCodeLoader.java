@@ -39,6 +39,8 @@ public class ByteCodeLoader extends Object {
     // https://stackoverflow.com/questions/21972561/stringtokenizer-not-working-with-bufferedreader
     public Program loadCodes() {
         ArrayList<ByteCode> program = new ArrayList<>();
+        Program programCode = new Program();
+        // try catch block to catch the many errors being encountered during java reflection
         try {
             String currLine = this.byteSource.readLine();
             String token;
@@ -55,12 +57,18 @@ public class ByteCodeLoader extends Object {
                 ByteCode bc = (ByteCode) c.getDeclaredConstructor().newInstance();
                 while (this.tokenizer.hasMoreTokens()) {
                     arguments.add(this.tokenizer.nextToken());
-                    program.add(bc.init(arguments));
+//                    program.add(bc.init(arguments));
+                    programCode.addCode(bc.init(arguments));
                 }
             }
         } catch (Exception error) {
             System.out.println("Cannot load current bytecode.");
             return null;
         }
+
+        // want to return programCode with resolved address
+        // might need to move this line of code; not sure yet.
+        programCode.resolveAddrs();
+        return programCode;
     }
 }
