@@ -16,7 +16,6 @@ public abstract class ByteCode {
 //        return null;
 //    }
 
-    public
 
     public abstract void execute(VirtualMachine vm);
 

@@ -4,12 +4,14 @@ import interpreter.bytecode.ByteCode;
 import interpreter.bytecode.LabelCode;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Program {
 
     private ArrayList<ByteCode> program;
     private ArrayList<Integer> labels;
     private int pc;
+    private StringTokenizer tokenizer;
 
     public Program() {
         program = new ArrayList<>();
@@ -32,16 +34,42 @@ public class Program {
      * @param // program Program object that holds a list of ByteCodes
      */
     public void resolveAddrs() {
-//        ArrayList<String> labels;
+        // need ArrayList so we can use init to recreate a ByteCode with proper address?
+        ArrayList<String> labels = new ArrayList<>();
 //        int pc;
-        for (pc = 0; !(this.program.isEmpty()); pc++){
-            if ((this.program.toString().compareToIgnoreCase("label")) == 0){
-                labels.add(pc);
+        for (int i = 0; !(this.program.isEmpty()); i++) {
+//            ByteCode bc = this.program.get(i);
+            String currBC = this.program.get(i).toString();
+            int startOfLabel = (currBC.indexOf(" ")) + 1;
+            String isolatedBC = currBC.substring(0, (startOfLabel - 1));
+            String label = currBC.substring(startOfLabel, getSize() - 1);
+
+            if (((this.program.get(i).toString().compareToIgnoreCase("falsebranch")) == 0) ||
+                    ((this.program.get(i).toString().compareToIgnoreCase("goto")) == 0) ||
+                    ((this.program.get(i).toString().compareToIgnoreCase("call")) == 0)) {
+
+                for (pc = 0; !(this.program.get(pc).toString().contains(label)); pc++) {
+                    if (i == (getSize() - 1)) {
+                        System.out.println("Label not found: " + label);
+                    }
+                }
+                // remove BC with unresolved address
+                this.program.remove(i);
+                try {
+                    String currByteCode = CodeTable.getClassName(isolatedBC);
+                    Class c = Class.forName("interpreter.bytecode." + currByteCode);
+                    ByteCode newBC = (ByteCode) c.getDeclaredConstructor().newInstance();
+                    labels.add(Integer.toString(pc));
+                    // replace BC with resolved address
+                    this.program.add(i, newBC.init(labels));
+                } catch (Exception e) {
+                    System.out.println("in resolve address, couldn't make instance of BC.");
+                }
             }
         }
     }
 
-    public void addCode(ByteCode newCode){
+    public void addCode(ByteCode newCode) {
         this.program.add(newCode);
     }
 
