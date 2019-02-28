@@ -37,18 +37,25 @@ public class Program {
         // need ArrayList so we can use init to recreate a ByteCode with proper address?
         ArrayList<String> labels = new ArrayList<>();
 //        int pc;
-        for (int i = 0; !(this.program.isEmpty()); i++) {
+        for (int i = 0; i < program.size(); i++) {
+            System.out.println("entered for loop in resolveAddr");
 //            ByteCode bc = this.program.get(i);
             String currBC = this.program.get(i).toString();
+            System.out.println("current BC: " + this.program.get(i).toString());
             int startOfLabel = (currBC.indexOf(" ")) + 1;
+            System.out.println("index of start of label: " + startOfLabel);
             String isolatedBC = currBC.substring(0, (startOfLabel - 1));
+            System.out.println("BC extracted without arguments: " + isolatedBC);
             String label = currBC.substring(startOfLabel, getSize() - 1);
+            System.out.println("label extracted from BC line: " + label);
 
             if (((this.program.get(i).toString().compareToIgnoreCase("falsebranch")) == 0) ||
                     ((this.program.get(i).toString().compareToIgnoreCase("goto")) == 0) ||
                     ((this.program.get(i).toString().compareToIgnoreCase("call")) == 0)) {
+                System.out.println("if statement entered");
 
                 for (pc = 0; !(this.program.get(pc).toString().contains(label)); pc++) {
+                    System.out.println("entered for loop to look for corresponding label");
                     if (i == (getSize() - 1)) {
                         System.out.println("Label not found: " + label);
                     }
@@ -62,6 +69,8 @@ public class Program {
                     labels.add(Integer.toString(pc));
                     // replace BC with resolved address
                     this.program.add(i, newBC.init(labels));
+                    System.out.println("Adding resolved address at pc " + i);
+                    System.out.println("revised BC: " + this.program.get(i));
                 } catch (Exception e) {
                     System.out.println("in resolve address, couldn't make instance of BC.");
                 }

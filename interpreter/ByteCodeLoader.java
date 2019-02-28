@@ -44,22 +44,32 @@ public class ByteCodeLoader extends Object {
         try {
             String currLine = this.byteSource.readLine();
             String token;
-            this.tokenizer = new StringTokenizer(currLine, DELIMITERS, false);
+//            this.tokenizer = new StringTokenizer(currLine, DELIMITERS, false);
+//            System.out.println("created tokenizer");
             ArrayList<String> arguments = new ArrayList<>();
 
 //        while there are lines in file
-            while (currLine != null) {
+            while (byteSource.ready()) {
 //            while there are tokens in line, create instance of ByteCode class
 //            and save arguments to ArrayList<String>
-                token = this.tokenizer.toString();
+                this.tokenizer = new StringTokenizer(currLine, DELIMITERS, false);
+                token = this.tokenizer.nextToken();
                 String currByteCode = CodeTable.getClassName(token);
                 Class c = Class.forName("interpreter.bytecode." + currByteCode);
                 ByteCode bc = (ByteCode) c.getDeclaredConstructor().newInstance();
+                System.out.println("Created instance of BC from " + currByteCode);
+                int i = 0;
                 while (this.tokenizer.hasMoreTokens()) {
                     arguments.add(this.tokenizer.nextToken());
+                    System.out.println("arg" + i + ": " + arguments.get(i));
 //                    program.add(bc.init(arguments));
-                    programCode.addCode(bc.init(arguments));
+//                    System.out.println(bc + " " + arguments.get(i));
+                    i++;
                 }
+//                i = 0;
+                programCode.addCode(bc.init(arguments));
+                arguments.clear();
+                currLine = this.byteSource.readLine();
             }
         } catch (Exception error) {
             System.out.println("Cannot load current bytecode.");
