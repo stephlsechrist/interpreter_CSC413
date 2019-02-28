@@ -43,18 +43,14 @@ public class ByteCodeLoader extends Object {
         // try catch block to catch the many errors being encountered during java reflection
         try {
             String currLine = this.byteSource.readLine();
-            String token;
-//            this.tokenizer = new StringTokenizer(currLine, DELIMITERS, false);
-//            System.out.println("created tokenizer");
             ArrayList<String> arguments = new ArrayList<>();
 
 //        while there are lines in file
             while (byteSource.ready()) {
 //            while there are tokens in line, create instance of ByteCode class
 //            and save arguments to ArrayList<String>
-                this.tokenizer = new StringTokenizer(currLine, DELIMITERS, false);
-                token = this.tokenizer.nextToken();
-                String currByteCode = CodeTable.getClassName(token);
+                this.tokenizer = new StringTokenizer(this.byteSource.readLine(), DELIMITERS, false);
+                String currByteCode = CodeTable.getClassName(this.tokenizer.nextToken());
                 Class c = Class.forName("interpreter.bytecode." + currByteCode);
                 ByteCode bc = (ByteCode) c.getDeclaredConstructor().newInstance();
                 System.out.println("Created instance of BC from " + currByteCode);
@@ -69,7 +65,7 @@ public class ByteCodeLoader extends Object {
 //                i = 0;
                 programCode.addCode(bc.init(arguments));
                 arguments.clear();
-                currLine = this.byteSource.readLine();
+//                currLine = this.byteSource.readLine();
             }
         } catch (Exception error) {
             System.out.println("Cannot load current bytecode.");
@@ -78,6 +74,7 @@ public class ByteCodeLoader extends Object {
 
         // want to return programCode with resolved address
         // might need to move this line of code; not sure yet.
+//        System.out.println(programCode.getCode(1));
         programCode.resolveAddrs();
         return programCode;
     }
