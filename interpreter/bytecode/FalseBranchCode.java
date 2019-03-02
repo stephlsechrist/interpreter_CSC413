@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class FalseBranchCode extends ByteCode {
     private String label;
+    private int branchAddr;
 
     @Override
     public void init(ArrayList<String> arguments){
@@ -17,5 +18,13 @@ public class FalseBranchCode extends ByteCode {
 
     public String getLabel(){
         return this.label;
+    }
+
+    public void setBranchAddr(int addr){
+        this.branchAddr = addr;
+    }
+
+    public int getBranchAddr(){
+        return this.branchAddr;
     }
 }

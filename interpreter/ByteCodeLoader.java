@@ -73,11 +73,12 @@ public class ByteCodeLoader extends Object {
             return null;
         }
 
+        System.out.println();
         // want to return programCode with resolved address
         // might need to move this line of code; not sure yet.
 //        System.out.println(programCode.getCode(1));
         programCode.resolveAddrs();
-        System.out.println("BCL: addresses resolved and about to return programCode");
+        System.out.println("BCL: addresses resolved and about to return programCode\n");
         return programCode;
     }
 }

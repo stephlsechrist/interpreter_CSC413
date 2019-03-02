@@ -5,9 +5,11 @@ import java.util.ArrayList;
 
 public class GotoCode extends ByteCode {
     private String label;
+    private int branchAddr;
 
     @Override
     public void init(ArrayList<String> arguments){
+        this.label = arguments.get(0);
     }
 
     @Override
@@ -16,5 +18,12 @@ public class GotoCode extends ByteCode {
 
     public String getLabel(){
         return this.label;
+    }
+    public void setBranchAddr(int addr){
+        this.branchAddr = addr;
+    }
+
+    public int getBranchAddr(){
+        return this.branchAddr;
     }
 }
