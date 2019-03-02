@@ -41,9 +41,11 @@ public class Program {
         }
         System.out.println("resolveAddr: finished");
 
-//        for (int i = 0; i < program.size(); i++){
-//
-//        }
+        for (int i = 0; i < program.size(); i++){
+            int posToClip = program.get(i).toString().indexOf("@");
+            String bc = program.get(i).toString().substring(21,posToClip);
+            System.out.println(bc);
+        }
     }
 
     public void addCode(ByteCode newCode) {
