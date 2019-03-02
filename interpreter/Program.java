@@ -1,17 +1,18 @@
 package interpreter;
 
 import interpreter.bytecode.ByteCode;
-import interpreter.bytecode.LabelCode;
+//import interpreter.bytecode.LabelCode;
 
+//import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 public class Program {
 
     private ArrayList<ByteCode> program;
-    private ArrayList<Integer> labels;
     private int pc;
-    private StringTokenizer tokenizer;
+    private HashMap<String, Integer> labels = new HashMap<String, Integer>();
 
     public Program() {
         program = new ArrayList<>();
@@ -35,47 +36,14 @@ public class Program {
      */
     public void resolveAddrs() {
         // need ArrayList so we can use init to recreate a ByteCode with proper address?
-        ArrayList<String> labels = new ArrayList<>();
-//        int pc;
-        for (int i = 0; i < program.size(); i++) {
-            System.out.println("entered for loop in resolveAddr");
-//            ByteCode bc = this.program.get(i);
-            String currBC = this.program.get(i).toString();
-            System.out.println("current BC: " + this.program.get(i).toString());
-            int startOfLabel = (currBC.indexOf(" ")) + 1;
-            System.out.println("index of start of label: " + startOfLabel);
-            String isolatedBC = currBC.substring(0, (startOfLabel - 1));
-            System.out.println("BC extracted without arguments: " + isolatedBC);
-            String label = currBC.substring(startOfLabel, getSize() - 1);
-            System.out.println("label extracted from BC line: " + label);
-
-            if (((this.program.get(i).toString().compareToIgnoreCase("falsebranch")) == 0) ||
-                    ((this.program.get(i).toString().compareToIgnoreCase("goto")) == 0) ||
-                    ((this.program.get(i).toString().compareToIgnoreCase("call")) == 0)) {
-                System.out.println("if statement entered");
-
-                for (pc = 0; !(this.program.get(pc).toString().contains(label)); pc++) {
-                    System.out.println("entered for loop to look for corresponding label");
-                    if (i == (getSize() - 1)) {
-                        System.out.println("Label not found: " + label);
-                    }
-                }
-                // remove BC with unresolved address
-                this.program.remove(i);
-                try {
-                    String currByteCode = CodeTable.getClassName(isolatedBC);
-                    Class c = Class.forName("interpreter.bytecode." + currByteCode);
-                    ByteCode newBC = (ByteCode) c.getDeclaredConstructor().newInstance();
-                    labels.add(Integer.toString(pc));
-                    // replace BC with resolved address
-                    this.program.add(i, newBC.init(labels));
-                    System.out.println("Adding resolved address at pc " + i);
-                    System.out.println("revised BC: " + this.program.get(i));
-                } catch (Exception e) {
-                    System.out.println("in resolve address, couldn't make instance of BC.");
-                }
-            }
+        for (int i = 0; i < program.size(); i++){
+            System.out.println(program.get(i) + " " + program.size());
         }
+        System.out.println("resolveAddr: finished");
+
+//        for (int i = 0; i < program.size(); i++){
+//
+//        }
     }
 
     public void addCode(ByteCode newCode) {

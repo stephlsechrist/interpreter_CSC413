@@ -16,5 +16,21 @@ public class RunTimeStack {
         framePointer.add(0);
     }
 
-    // dump method here
+    // recursive iterator do be able to display with commas until frame is reached.
+    public void dump(){
+    }
+
+    public int peek(){ return 0; }
+
+    public int pop() { return 0; }
+
+    public void newFrameAt(int offset){}
+
+    public void popFrame(){}
+
+    public int store(int offset){return 0;}
+
+    public int load(int offset){return 0;}
+
+    public Integer push(Integer val){ return null; }
 }

@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 public class StoreCode extends ByteCode {
     @Override
-    public ByteCode init(ArrayList<String> arguments){
-        return null;
+    public void init(ArrayList<String> arguments){
     }
 
     @Override

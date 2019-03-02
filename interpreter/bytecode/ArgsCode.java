@@ -6,8 +6,7 @@ import java.util.ArrayList;
 
 public class ArgsCode extends ByteCode {
     @Override
-    public ByteCode init(ArrayList<String> arguments){
-        return null;
+    public void init(ArrayList<String> arguments){
     }
 
     @Override

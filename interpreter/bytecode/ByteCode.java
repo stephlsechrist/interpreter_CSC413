@@ -19,5 +19,5 @@ public abstract class ByteCode {
 
     public abstract void execute(VirtualMachine vm);
 
-    public abstract ByteCode init(ArrayList<String> arguments);
+    public abstract void init(ArrayList<String> arguments);
 }

@@ -4,12 +4,19 @@ import interpreter.VirtualMachine;
 import java.util.ArrayList;
 
 public class LabelCode extends ByteCode {
+    private String label;
+//    private int pc;
+
     @Override
-    public ByteCode init(ArrayList<String> arguments){
-        return null;
+    public void init(ArrayList<String> arguments){
+        label = arguments.get(0);
     }
 
     @Override
     public void execute(VirtualMachine vm){
+    }
+
+    public String getLabel(){
+        return this.label;
     }
 }
