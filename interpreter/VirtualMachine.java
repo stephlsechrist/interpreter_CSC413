@@ -38,4 +38,12 @@ public class VirtualMachine {
         isRunning = state;
     }
 
+    public void setPC (int pc){
+        this.pc = pc;
+    }
+
+    public int getPC(){
+        return this.pc;
+    }
+
 }
