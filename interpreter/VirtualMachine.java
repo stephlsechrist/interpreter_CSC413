@@ -50,7 +50,7 @@ public class VirtualMachine {
         this.returnAddrs.push(newAddrs);
     }
 
-    public int getReturnAddrs(){
+    public int popReturnAddrs(){
         return (int) this.returnAddrs.pop();
     }
 

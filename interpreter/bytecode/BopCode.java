@@ -18,30 +18,23 @@ public class BopCode extends ByteCode {
 
     @Override
     public void execute(VirtualMachine vm){
+        op2 = vm.popRunStack();
+        op1 = vm.popRunStack();
+
         switch (operation){
             case "+":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 vm.pushRunStack(op1 + op2);
                 break;
             case "-":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 vm.pushRunStack(op1 - op2);
                 break;
             case "/":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 vm.pushRunStack(op1 / op2);
                 break;
             case "*":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 vm.pushRunStack(op1 * op2);
                 break;
             case "==":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 if (op2 == op1){
                     vm.pushRunStack(1);
                 }
@@ -50,8 +43,6 @@ public class BopCode extends ByteCode {
                 }
                 break;
             case "!=":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 if (op2 == op1) {
                     vm.pushRunStack(0);
                 }
@@ -60,8 +51,6 @@ public class BopCode extends ByteCode {
                 }
                 break;
             case "<=":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 if (op1 <= op2) {
                     vm.pushRunStack(1);
                 }
@@ -70,8 +59,6 @@ public class BopCode extends ByteCode {
                 }
                 break;
             case ">":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 if (op1 > op2) {
                     vm.pushRunStack(1);
                 }
@@ -80,8 +67,6 @@ public class BopCode extends ByteCode {
                 }
                 break;
             case ">=":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 if (op1 >= op2) {
                     vm.pushRunStack(1);
                 }
@@ -90,8 +75,6 @@ public class BopCode extends ByteCode {
                 }
                 break;
             case "<":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 if (op1 < op2) {
                     vm.pushRunStack(1);
                 }
@@ -100,8 +83,6 @@ public class BopCode extends ByteCode {
                 }
                 break;
             case "|":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 if ((op1 + op2) > 0){
                     vm.pushRunStack(1);
                 }
@@ -110,8 +91,6 @@ public class BopCode extends ByteCode {
                 }
                 break;
             case "&":
-                op2 = vm.popRunStack();
-                op1 = vm.popRunStack();
                 if (((op1 + op2) == 0) || ((op1 + op2) == 2)) {
                     vm.pushRunStack(1);
                 }
