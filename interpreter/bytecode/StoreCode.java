@@ -9,11 +9,16 @@ public class StoreCode extends ByteCode {
 
     @Override
     public void init(ArrayList<String> arguments){
+        if (!arguments.isEmpty()) {
+            value = Integer.parseInt(arguments.get(0));
+            if (arguments.size() > 1){
+                variable = arguments.get(1);
+            }
+        }
     }
 
     @Override
     public void execute(VirtualMachine vm){
-        value = vm.popRunStack();
         vm.storeRunStack(value);
     }
 }

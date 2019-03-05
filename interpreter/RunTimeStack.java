@@ -71,13 +71,20 @@ public class RunTimeStack {
     }
 
     public int store(int offset) {
+//        System.out.println("entered store in RTS");
         if (runTimeStack.size() > framePointer.peek()) {
+//            System.out.println("frame not empty so value to store exists on top of stack");
             int temp = pop();
             int offsetFromFrame = offset + (framePointer.peek());
+//            System.out.println("Offset is " + offset + " & frame pointer is at " + framePointer.peek());
+//            System.out.println("we are loading the value at index " + offsetFromFrame);
             // need to check again because altered RTS
             if (runTimeStack.size() > framePointer.peek()) {
-                runTimeStack.remove(offsetFromFrame);
+//                System.out.println("frame not empty so storing at offset");
+                Integer temp1 = runTimeStack.remove(offsetFromFrame);
+//                System.out.println("removed item : " + temp1.toString());
                 runTimeStack.add(offsetFromFrame, (Integer) temp);
+//                System.out.println("added item " + runTimeStack.get(offsetFromFrame).toString());
             }
             return temp;
 
@@ -88,10 +95,16 @@ public class RunTimeStack {
     }
 
     public int load(int offset) {
+//        System.out.println("entered load in RTS");
         int offsetFromFrame = offset + (framePointer.peek());
+//        System.out.println("Offset is " + offset + " & frame pointer is at " + framePointer.peek());
+//        System.out.println("we are loading the value at index " + offsetFromFrame);
         if (!runTimeStack.isEmpty()) {
+//            System.out.println("RTS not empty, so performing load");
             int temp = (int) runTimeStack.get(offsetFromFrame);
+//            System.out.println("value we're loading to top of stack " + temp);
             push((Integer) temp);
+//            System.out.println("finished with load in RTS; back to VM");
             return temp;
         }
         else {
@@ -104,8 +117,19 @@ public class RunTimeStack {
             runTimeStack.add(0, val);
         }
         else {
-            runTimeStack.add((runTimeStack.size() - 1), val);
+            runTimeStack.add((runTimeStack.size()), val);
         }
         return val;
     }
+
+    public int size()
+    {
+        return runTimeStack.size();
+    }
+
+    public int get(int pos)
+    {
+        return runTimeStack.get(pos);
+    }
+
 }

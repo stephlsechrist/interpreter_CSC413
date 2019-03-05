@@ -10,7 +10,9 @@ public class LoadCode extends ByteCode {
     @Override
     public void init(ArrayList<String> arguments){
         value = Integer.parseInt(arguments.get(0));
-        variable = arguments.get(1);
+        if (arguments.size() > 1){
+            variable = arguments.get(1);
+        }
     }
 
     @Override

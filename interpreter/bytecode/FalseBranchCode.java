@@ -1,34 +1,34 @@
 package interpreter.bytecode;
 
 import interpreter.VirtualMachine;
+
 import java.util.ArrayList;
 
 public class FalseBranchCode extends ByteCode {
     private String label;
     private int branchAddr;
-    private int currAddr;
 
     @Override
-    public void init(ArrayList<String> arguments){
+    public void init(ArrayList<String> arguments) {
         label = arguments.get(0);
     }
 
     @Override
-    public void execute(VirtualMachine vm){
-        currAddr = vm.getPC();
-        vm.setPC(branchAddr);
-        vm.pushReturnAddrs(currAddr);
+    public void execute(VirtualMachine vm) {
+        if (vm.popRunStack() == 0) {
+            vm.setPC(branchAddr);
+        }
     }
 
-    public String getLabel(){
+    public String getLabel() {
         return this.label;
     }
 
-    public void setBranchAddr(int addr){
+    public void setBranchAddr(int addr) {
         this.branchAddr = addr;
     }
 
-    public int getBranchAddr(){
+    public int getBranchAddr() {
         return this.branchAddr;
     }
 }

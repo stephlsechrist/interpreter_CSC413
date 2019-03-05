@@ -17,7 +17,7 @@ public class ReadCode extends ByteCode {
     @Override
     public void execute(VirtualMachine vm) {
         // should appear before BC printed with DUMP on
-        boolean badInput = false;
+        boolean badInput;
 
         do {
             System.out.print("Enter an integer: ");

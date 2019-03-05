@@ -55,7 +55,7 @@ public class Program {
                 System.out.println((i+1) + ": " + currLabel);
                 System.out.println(i);
                 // load HashMap
-                labels.put(currLabel, (i+1));
+                labels.put(currLabel, (i));
                 System.out.println("Added to HashMap: " + labels.get(currLabel) + "\n");
             }
         }
