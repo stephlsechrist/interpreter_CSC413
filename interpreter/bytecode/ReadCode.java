@@ -33,4 +33,9 @@ public class ReadCode extends ByteCode {
 
         vm.pushRunStack(input);
     }
+
+//    @Override
+//    public String toString(){
+//        return ("READ");
+//    }
 }

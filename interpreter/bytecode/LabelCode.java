@@ -19,4 +19,9 @@ public class LabelCode extends ByteCode {
     public String getLabel(){
         return this.label;
     }
+
+//    @Override
+//    public String toString(){
+//        return ("LABEL " + label);
+//    }
 }

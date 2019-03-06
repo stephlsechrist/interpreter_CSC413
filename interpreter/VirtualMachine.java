@@ -33,6 +33,7 @@ public class VirtualMachine {
             code.execute(this);
             if (dumpState) {
                 System.out.println(pc + " " + code.getClass().getSimpleName());
+                System.out.println(code.printBC());
                 runStack.dump();
             } // used to dump runstack state.
             pc++;

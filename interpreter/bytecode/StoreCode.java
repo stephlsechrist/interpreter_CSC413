@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class StoreCode extends ByteCode {
     private int value;
-    private String variable;
+    private String variable = "";
 
     @Override
     public void init(ArrayList<String> arguments){
@@ -21,4 +21,9 @@ public class StoreCode extends ByteCode {
     public void execute(VirtualMachine vm){
         vm.storeRunStack(value);
     }
+
+//    @Override
+//    public String toString(){
+//        return ("STORE " + value + variable);
+//    }
 }

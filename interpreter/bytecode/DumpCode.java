@@ -10,4 +10,9 @@ public class DumpCode extends ByteCode {
     @Override
     public void execute(VirtualMachine vm){
     }
+
+//    @Override
+//    public String printBC(){
+//        return ("");
+//    }
 }

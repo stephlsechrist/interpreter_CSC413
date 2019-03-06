@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class LoadCode extends ByteCode {
     private int value;
-    private String variable;
+    private String variable = "";
 
     @Override
     public void init(ArrayList<String> arguments){
@@ -19,4 +19,9 @@ public class LoadCode extends ByteCode {
     public void execute(VirtualMachine vm){
         vm.loadRunStack(value);
     }
+
+//    @Override
+//    public String toString(){
+//        return ("LOAD " + value + variable);
+//    }
 }

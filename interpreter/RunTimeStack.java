@@ -1,8 +1,8 @@
 package interpreter;
 
-import java.util.ArrayList;
-import java.util.EmptyStackException;
-import java.util.Stack;
+
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class RunTimeStack {
 
@@ -18,26 +18,32 @@ public class RunTimeStack {
     }
 
     // recursive iterator do be able to display with commas until frame is reached.
+    // stuck on this for a few hours and down to the wire
+    // got help from Thomas Sechrist
     public void dump() {
-        String rawOutput = runTimeStack.toString();
-        char[] outputArray = rawOutput.toCharArray();
-        for (int i = 0; i < outputArray.length; i++) {
-            if (framePointer.contains(i + 1)) {
-                outputArray[i] = ']';
+        ArrayList<Integer> clonedStack;
+        clonedStack = (ArrayList)runTimeStack.clone();
+        ArrayList holdArray[] = new ArrayList[framePointer.size()];
+
+
+        for(int i = framePointer.size(); i > 0; i--)
+        {
+            holdArray[i - 1] = new ArrayList<>();
+            int top = framePointer.get(i - 1);
+            int size = clonedStack.size();
+
+            for(int j = top; j < size; j++)
+            {
+                holdArray[i - 1].add(clonedStack.remove(top));
             }
-            System.out.print(outputArray[i] + " ");
-//            else if (framePointer.contains(i)) {
-//                System.out.print("[");
-//            }
-//
-//            else{
-//                System.out.print(runTimeStack.get(i) + ",");
-            }
-            System.out.println();
-            System.out.print(runTimeStack.toString());
-//        }
-//        if (!runTimeStack.isEmpty())
-            System.out.println();
+        }
+
+        for(int i = 0; i < framePointer.size(); i++)
+        {
+            System.out.print(holdArray[i].toString());
+        }
+        System.out.println();
+        System.out.println(runTimeStack.toString());
     }
 
     public int peek() {

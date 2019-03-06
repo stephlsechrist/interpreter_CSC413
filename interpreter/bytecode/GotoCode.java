@@ -28,4 +28,9 @@ public class GotoCode extends ByteCode {
     public int getBranchAddr(){
         return this.branchAddr;
     }
+
+//    @Override
+//    public String toString(){
+//        return ("GOTO " + label);
+//    }
 }

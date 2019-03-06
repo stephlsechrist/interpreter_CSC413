@@ -12,4 +12,9 @@ public class HaltCode extends ByteCode {
     public void execute(VirtualMachine vm){
         vm.setIsRunning(false);
     }
+
+//    @Override
+//    public String toString(){
+//        return ("HALT");
+//    }
 }

@@ -20,4 +20,9 @@ public class ArgsCode extends ByteCode {
     public void execute(VirtualMachine vm) {
         vm.newFrameRunStack(frameInsert);
     }
+
+    @Override
+    public String printBC(){
+        return ("ARGS " + frameInsert);
+    }
 }

@@ -4,7 +4,7 @@ import interpreter.VirtualMachine;
 import java.util.ArrayList;
 
 public class ReturnCode extends ByteCode {
-    private String label;
+    private String label = "";
     private int newAddr;
 
     @Override
@@ -20,4 +20,10 @@ public class ReturnCode extends ByteCode {
         vm.setPC(newAddr);
         vm.popFrameRunStack();
     }
+
+
+//    @Override
+//    public String toString(){
+//        return ("RETURN " + label);
+//    }
 }

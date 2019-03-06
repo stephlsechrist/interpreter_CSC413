@@ -14,9 +14,8 @@ public class WriteCode extends ByteCode {
         System.out.println(vm.peekRunStack());
     }
 
-    // from lecture 3/4
 //    @Override
 //    public String toString(){
-//        return "WRITE ";
+//        return ("WRITE ");
 //    }
 }

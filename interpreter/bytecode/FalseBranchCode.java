@@ -31,4 +31,9 @@ public class FalseBranchCode extends ByteCode {
     public int getBranchAddr() {
         return this.branchAddr;
     }
+
+    @Override
+    public String printBC(){
+        return ("FALSEBRANCH " + label);
+    }
 }

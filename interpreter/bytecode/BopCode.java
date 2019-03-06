@@ -100,4 +100,9 @@ public class BopCode extends ByteCode {
                 break;
         }
     }
+
+    @Override
+    public String printBC(){
+        return ("BOP " + operation);
+    }
 }

@@ -17,4 +17,9 @@ public class PopCode extends ByteCode {
             vm.popRunStack();
         }
     }
+
+//    @Override
+//    public String toString(){
+//        return ("POP " + value);
+//    }
 }

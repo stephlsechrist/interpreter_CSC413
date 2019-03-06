@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class LitCode extends ByteCode {
     private int value;
-    private String variable;
+    private String variable = "";
 
     @Override
     public void init(ArrayList<String> arguments) {
@@ -21,7 +21,9 @@ public class LitCode extends ByteCode {
         vm.pushRunStack(value);
     }
 
-    //    public String getVariable(){
-    //        return this.variable;
-    //    }
+
+//    @Override
+//    public String toString(){
+//        return ("LIT " + value + variable);
+//    }
 }
