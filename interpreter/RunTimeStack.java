@@ -19,6 +19,25 @@ public class RunTimeStack {
 
     // recursive iterator do be able to display with commas until frame is reached.
     public void dump() {
+        String rawOutput = runTimeStack.toString();
+        char[] outputArray = rawOutput.toCharArray();
+        for (int i = 0; i < outputArray.length; i++) {
+            if (framePointer.contains(i + 1)) {
+                outputArray[i] = ']';
+            }
+            System.out.print(outputArray[i] + " ");
+//            else if (framePointer.contains(i)) {
+//                System.out.print("[");
+//            }
+//
+//            else{
+//                System.out.print(runTimeStack.get(i) + ",");
+            }
+            System.out.println();
+            System.out.print(runTimeStack.toString());
+//        }
+//        if (!runTimeStack.isEmpty())
+            System.out.println();
     }
 
     public int peek() {
@@ -29,8 +48,9 @@ public class RunTimeStack {
 
         else {
             // change print statement later
-            // System.out.println("The run time stack is empty");
-            throw new EmptyStackException();
+            System.out.println("The run time stack is empty");
+            //            throw new EmptyStackException();
+            return 0;
         }
         //        return 0;
     }
@@ -43,7 +63,8 @@ public class RunTimeStack {
         }
         else {
             System.out.println("Frame is empty");
-            throw new EmptyStackException();
+            //            throw new EmptyStackException();
+            return 0;
         }
         return value;
     }
@@ -71,44 +92,48 @@ public class RunTimeStack {
     }
 
     public int store(int offset) {
-//        System.out.println("entered store in RTS");
+        //        System.out.println("entered store in RTS");
         if (runTimeStack.size() > framePointer.peek()) {
-//            System.out.println("frame not empty so value to store exists on top of stack");
+            //            System.out.println("frame not empty so value to store exists on top of stack");
             int temp = pop();
             int offsetFromFrame = offset + (framePointer.peek());
-//            System.out.println("Offset is " + offset + " & frame pointer is at " + framePointer.peek());
-//            System.out.println("we are loading the value at index " + offsetFromFrame);
+            //            System.out.println("Offset is " + offset + " & frame pointer is at " + framePointer.peek());
+            //            System.out.println("we are loading the value at index " + offsetFromFrame);
             // need to check again because altered RTS
             if (runTimeStack.size() > framePointer.peek()) {
-//                System.out.println("frame not empty so storing at offset");
+                //                System.out.println("frame not empty so storing at offset");
                 Integer temp1 = runTimeStack.remove(offsetFromFrame);
-//                System.out.println("removed item : " + temp1.toString());
+                //                System.out.println("removed item : " + temp1.toString());
                 runTimeStack.add(offsetFromFrame, (Integer) temp);
-//                System.out.println("added item " + runTimeStack.get(offsetFromFrame).toString());
+                //                System.out.println("added item " + runTimeStack.get(offsetFromFrame).toString());
             }
             return temp;
 
         }
         else {
-            throw new EmptyStackException();
+            //            throw new EmptyStackException();
+            System.out.println("The stack is empty");
+            return 0;
         }
     }
 
     public int load(int offset) {
-//        System.out.println("entered load in RTS");
+        //        System.out.println("entered load in RTS");
         int offsetFromFrame = offset + (framePointer.peek());
-//        System.out.println("Offset is " + offset + " & frame pointer is at " + framePointer.peek());
-//        System.out.println("we are loading the value at index " + offsetFromFrame);
+        //        System.out.println("Offset is " + offset + " & frame pointer is at " + framePointer.peek());
+        //        System.out.println("we are loading the value at index " + offsetFromFrame);
         if (!runTimeStack.isEmpty()) {
-//            System.out.println("RTS not empty, so performing load");
+            //            System.out.println("RTS not empty, so performing load");
             int temp = (int) runTimeStack.get(offsetFromFrame);
-//            System.out.println("value we're loading to top of stack " + temp);
+            //            System.out.println("value we're loading to top of stack " + temp);
             push((Integer) temp);
-//            System.out.println("finished with load in RTS; back to VM");
+            //            System.out.println("finished with load in RTS; back to VM");
             return temp;
         }
         else {
-            throw new EmptyStackException();
+            //            throw new EmptyStackException();
+            System.out.println("The stack is empty");
+            return 0;
         }
     }
 
@@ -122,13 +147,11 @@ public class RunTimeStack {
         return val;
     }
 
-    public int size()
-    {
+    public int size() {
         return runTimeStack.size();
     }
 
-    public int get(int pos)
-    {
+    public int get(int pos) {
         return runTimeStack.get(pos);
     }
 

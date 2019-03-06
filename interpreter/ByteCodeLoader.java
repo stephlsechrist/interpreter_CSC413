@@ -52,18 +52,18 @@ public class ByteCodeLoader extends Object {
                 String currByteCode = CodeTable.getClassName(tokenizer.nextToken());
                 Class c = Class.forName("interpreter.bytecode." + currByteCode);
                 ByteCode bc = (ByteCode) c.getDeclaredConstructor().newInstance();
-                System.out.println("Created instance of BC from " + currByteCode);
+//                System.out.println("Created instance of BC from " + currByteCode);
                 int i = 0;
                 while (tokenizer.hasMoreTokens()) {
                     arguments.add(tokenizer.nextToken());
-                    System.out.println("arg" + i + ": " + arguments.get(i));
+//                    System.out.println("arg" + i + ": " + arguments.get(i));
 //                    program.add(bc.init(arguments));
 //                    System.out.println(bc + " " + arguments.get(i));
                     i++;
                 }
                 bc.init(arguments);
                 programCode.addCode(bc);
-                System.out.println("BC just added: " + programCode.getCode(j) + " " + (j+1));
+//                System.out.println("BC just added: " + programCode.getCode(j) + " " + (j+1));
                 arguments.clear();
                 j++;
 //                currLine = this.byteSource.readLine();
@@ -73,12 +73,12 @@ public class ByteCodeLoader extends Object {
             return null;
         }
 
-        System.out.println();
+//        System.out.println();
         // want to return programCode with resolved address
         // might need to move this line of code; not sure yet.
 //        System.out.println(programCode.getCode(1));
         programCode.resolveAddrs();
-        System.out.println("BCL: addresses resolved and about to return programCode\n");
+//        System.out.println("BCL: addresses resolved and about to return programCode\n");
         return programCode;
     }
 }

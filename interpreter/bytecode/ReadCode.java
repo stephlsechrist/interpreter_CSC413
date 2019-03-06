@@ -1,5 +1,6 @@
 package interpreter.bytecode;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import interpreter.VirtualMachine;
@@ -17,17 +18,16 @@ public class ReadCode extends ByteCode {
     @Override
     public void execute(VirtualMachine vm) {
         // should appear before BC printed with DUMP on
-        boolean badInput;
+        boolean badInput = false;
 
         do {
             System.out.print("Enter an integer: ");
             try {
                 input = stdin.nextInt();
                 badInput = false;
-            } catch (NumberFormatException error) {
+            } catch (InputMismatchException error) {
                 badInput = true;
                 System.out.println("Improper input.");
-                System.out.print("Enter an integer: ");
             }
         } while (badInput);
 

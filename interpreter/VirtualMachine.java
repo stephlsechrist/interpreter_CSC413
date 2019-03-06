@@ -26,19 +26,22 @@ public class VirtualMachine {
         runStack = new RunTimeStack();
         returnAddrs = new Stack<Integer>();
         isRunning = true;
+        dumpState = true;
         while (isRunning) {
             ByteCode code = program.getCode(pc);
-            System.out.println("About to execute " + pc + " " + code.getClass());
+//            System.out.println("About to execute " + pc + " " + code.getClass());
             code.execute(this);
-            //runStack.dump(); // used to dump runstack state.
+            if (dumpState) {
+                System.out.println(pc + " " + code.getClass().getSimpleName());
+                runStack.dump();
+            } // used to dump runstack state.
             pc++;
 
-//            System.out.println(runStack.size());
-            for(int i = 0; i < runStack.size(); i++)
-            {
-                System.out.print(runStack.get(i) + " ");
-            }
-            System.out.println();
+            System.out.println(runStack.size());
+//            for (int i = 0; i < runStack.size(); i++) {
+//                System.out.print(runStack.get(i) + " ");
+//            }
+//            System.out.println();
         }
     }
 
