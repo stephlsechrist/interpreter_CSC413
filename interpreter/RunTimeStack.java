@@ -101,6 +101,17 @@ public class RunTimeStack {
         }
     }
 
+    public ArrayList peekFrame(){
+        ArrayList<Integer> valuesInFrame = new ArrayList<>();
+        try{
+            for (int i = framePointer.peek(); i < (runTimeStack.size()-1); i++){
+                valuesInFrame.add(runTimeStack.get(i));
+                System.out.println(valuesInFrame.get(i));
+            }
+        } catch (Exception e){}
+        return valuesInFrame;
+    }
+
     public int store(int offset) {
         //        System.out.println("entered store in RTS");
         if (runTimeStack.size() > framePointer.peek()) {
@@ -157,12 +168,13 @@ public class RunTimeStack {
         return val;
     }
 
-    public int size() {
-        return runTimeStack.size();
-    }
-
-    public int get(int pos) {
-        return runTimeStack.get(pos);
-    }
+//    used for debugging purposes
+//    public int size() {
+//        return runTimeStack.size();
+//    }
+//
+//    public int get(int pos) {
+//        return runTimeStack.get(pos);
+//    }
 
 }

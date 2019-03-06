@@ -3,6 +3,7 @@ package interpreter;
 import interpreter.bytecode.ByteCode;
 import interpreter.RunTimeStack;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
@@ -82,6 +83,10 @@ public class VirtualMachine {
 
     public void popFrameRunStack() {
         runStack.popFrame();
+    }
+
+    public String peekFrameRunStack(){
+        return runStack.peekFrame().toString();
     }
 
     public int storeRunStack(int offset) {

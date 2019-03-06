@@ -7,6 +7,7 @@ public class CallCode extends ByteCode {
     private String label;
     private int branchAddr;
     private int currAddr;
+    private String argumentsPassed;
 
     @Override
     public void init(ArrayList<String> arguments){
@@ -18,6 +19,7 @@ public class CallCode extends ByteCode {
         currAddr = vm.getPC();
         vm.setPC(branchAddr-1);
         vm.pushReturnAddrs(currAddr);
+        argumentsPassed = vm.peekFrameRunStack();
     }
 
     public String getLabel(){
@@ -34,6 +36,6 @@ public class CallCode extends ByteCode {
 
     @Override
     public String printBC(){
-        return ("CALL " + label);
+        return ("CALL " + label + " " + argumentsPassed);
     }
 }
