@@ -18,8 +18,8 @@ public class PopCode extends ByteCode {
         }
     }
 
-//    @Override
-//    public String toString(){
-//        return ("POP " + value);
-//    }
+    @Override
+    public String printBC(){
+        return ("POP " + value);
+    }
 }

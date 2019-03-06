@@ -16,7 +16,7 @@ public class CallCode extends ByteCode {
     @Override
     public void execute(VirtualMachine vm){
         currAddr = vm.getPC();
-        vm.setPC(branchAddr);
+        vm.setPC(branchAddr-1);
         vm.pushReturnAddrs(currAddr);
     }
 

@@ -16,7 +16,7 @@ public class FalseBranchCode extends ByteCode {
     @Override
     public void execute(VirtualMachine vm) {
         if (vm.popRunStack() == 0) {
-            vm.setPC(branchAddr);
+            vm.setPC(branchAddr-1);
         }
     }
 

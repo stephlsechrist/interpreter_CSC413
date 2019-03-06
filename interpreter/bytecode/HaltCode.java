@@ -13,8 +13,8 @@ public class HaltCode extends ByteCode {
         vm.setIsRunning(false);
     }
 
-//    @Override
-//    public String toString(){
-//        return ("HALT");
-//    }
+    @Override
+    public String printBC(){
+        return ("HALT");
+    }
 }

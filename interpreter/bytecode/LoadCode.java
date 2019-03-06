@@ -20,8 +20,8 @@ public class LoadCode extends ByteCode {
         vm.loadRunStack(value);
     }
 
-//    @Override
-//    public String toString(){
-//        return ("LOAD " + value + variable);
-//    }
+    @Override
+    public String printBC(){
+        return ("LOAD " + value + " " + variable);
+    }
 }

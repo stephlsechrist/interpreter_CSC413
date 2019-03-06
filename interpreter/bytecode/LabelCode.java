@@ -14,14 +14,15 @@ public class LabelCode extends ByteCode {
 
     @Override
     public void execute(VirtualMachine vm){
+        System.out.print("");
     }
 
     public String getLabel(){
         return this.label;
     }
 
-//    @Override
-//    public String toString(){
-//        return ("LABEL " + label);
-//    }
+    @Override
+    public String printBC(){
+        return ("LABEL " + label);
+    }
 }

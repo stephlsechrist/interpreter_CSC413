@@ -43,7 +43,7 @@ public class RunTimeStack {
             System.out.print(holdArray[i].toString());
         }
         System.out.println();
-        System.out.println(runTimeStack.toString());
+//        System.out.println(runTimeStack.toString());
     }
 
     public int peek() {
@@ -68,7 +68,7 @@ public class RunTimeStack {
             runTimeStack.remove(runTimeStack.size() - 1);
         }
         else {
-            System.out.println("Frame is empty");
+//            System.out.println("Frame is empty");
             //            throw new EmptyStackException();
             return 0;
         }
@@ -93,7 +93,7 @@ public class RunTimeStack {
                 push((Integer) valueToReturn);
             }
         } catch (EmptyStackException error) {
-            System.out.println("Frame could not be popped");
+//            System.out.println("Frame could not be popped");
         }
     }
 
@@ -118,7 +118,7 @@ public class RunTimeStack {
         }
         else {
             //            throw new EmptyStackException();
-            System.out.println("The stack is empty");
+//            System.out.println("The stack is empty");
             return 0;
         }
     }
@@ -138,7 +138,7 @@ public class RunTimeStack {
         }
         else {
             //            throw new EmptyStackException();
-            System.out.println("The stack is empty");
+//            System.out.println("The stack is empty");
             return 0;
         }
     }

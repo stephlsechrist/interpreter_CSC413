@@ -22,8 +22,8 @@ public class ReturnCode extends ByteCode {
     }
 
 
-//    @Override
-//    public String toString(){
-//        return ("RETURN " + label);
-//    }
+    @Override
+    public String printBC(){
+        return ("RETURN " + label);
+    }
 }

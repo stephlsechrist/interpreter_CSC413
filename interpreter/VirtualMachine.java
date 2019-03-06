@@ -21,24 +21,24 @@ public class VirtualMachine {
 
     public void executeProgram() {
         // sample base function below
-        System.out.println("Starting virtual machine");
+//        System.out.println("Starting virtual machine");
         pc = 0;
         runStack = new RunTimeStack();
         returnAddrs = new Stack<Integer>();
         isRunning = true;
-        dumpState = true;
+        dumpState = false;
         while (isRunning) {
             ByteCode code = program.getCode(pc);
 //            System.out.println("About to execute " + pc + " " + code.getClass());
             code.execute(this);
             if (dumpState) {
-                System.out.println(pc + " " + code.getClass().getSimpleName());
+//                System.out.println(pc + " " + code.getClass().getSimpleName());
                 System.out.println(code.printBC());
                 runStack.dump();
             } // used to dump runstack state.
             pc++;
 
-            System.out.println(runStack.size());
+//            System.out.println(runStack.size());
 //            for (int i = 0; i < runStack.size(); i++) {
 //                System.out.print(runStack.get(i) + " ");
 //            }
@@ -49,6 +49,8 @@ public class VirtualMachine {
     public void setIsRunning(boolean state) {
         isRunning = state;
     }
+
+    public void setDumpState(boolean dumpSwitch){ dumpState = dumpSwitch;}
 
     public void setPC(int pc) {
         this.pc = pc;

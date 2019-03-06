@@ -22,8 +22,8 @@ public class LitCode extends ByteCode {
     }
 
 
-//    @Override
-//    public String toString(){
-//        return ("LIT " + value + variable);
-//    }
+    @Override
+    public String printBC(){
+        return ("LIT " + value + " " + variable);
+    }
 }

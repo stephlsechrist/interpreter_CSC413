@@ -14,7 +14,7 @@ public class GotoCode extends ByteCode {
 
     @Override
     public void execute(VirtualMachine vm){
-        vm.setPC(branchAddr);
+        vm.setPC(branchAddr-1);
     }
 
     public String getLabel(){
@@ -29,8 +29,8 @@ public class GotoCode extends ByteCode {
         return this.branchAddr;
     }
 
-//    @Override
-//    public String toString(){
-//        return ("GOTO " + label);
-//    }
+    @Override
+    public String printBC(){
+        return ("GOTO " + label);
+    }
 }

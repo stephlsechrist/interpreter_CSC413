@@ -22,8 +22,8 @@ public class StoreCode extends ByteCode {
         vm.storeRunStack(value);
     }
 
-//    @Override
-//    public String toString(){
-//        return ("STORE " + value + variable);
-//    }
+    @Override
+    public String printBC(){
+        return ("STORE " + value + " " + variable);
+    }
 }
