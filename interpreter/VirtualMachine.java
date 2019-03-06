@@ -86,7 +86,7 @@ public class VirtualMachine {
     }
 
     public String peekFrameRunStack(){
-        return runStack.peekFrame().toString();
+        return runStack.peekFrame();
     }
 
     public int storeRunStack(int offset) {

@@ -3,6 +3,7 @@ package interpreter;
 
 import java.lang.reflect.Array;
 import java.util.*;
+import java.lang.String;
 
 public class RunTimeStack {
 
@@ -26,28 +27,25 @@ public class RunTimeStack {
     // ended up using his algorithm
     public void dump() {
         ArrayList<Integer> clonedStack;
-        clonedStack = (ArrayList)runTimeStack.clone();
+        clonedStack = (ArrayList) runTimeStack.clone();
         ArrayList holdArray[] = new ArrayList[framePointer.size()];
 
 
-        for(int i = framePointer.size(); i > 0; i--)
-        {
+        for (int i = framePointer.size(); i > 0; i--) {
             holdArray[i - 1] = new ArrayList<>();
             int top = framePointer.get(i - 1);
             int size = clonedStack.size();
 
-            for(int j = top; j < size; j++)
-            {
+            for (int j = top; j < size; j++) {
                 holdArray[i - 1].add(clonedStack.remove(top));
             }
         }
 
-        for(int i = 0; i < framePointer.size(); i++)
-        {
+        for (int i = 0; i < framePointer.size(); i++) {
             System.out.print(holdArray[i].toString());
         }
         System.out.println();
-//        System.out.println(runTimeStack.toString());
+        //        System.out.println(runTimeStack.toString());
     }
 
     public int peek() {
@@ -58,7 +56,7 @@ public class RunTimeStack {
 
         else {
             // change print statement later
-//            System.out.println("The run time stack is empty");
+            //            System.out.println("The run time stack is empty");
             //            throw new EmptyStackException();
             return 0;
         }
@@ -72,7 +70,7 @@ public class RunTimeStack {
             runTimeStack.remove(runTimeStack.size() - 1);
         }
         else {
-//            System.out.println("Frame is empty");
+            //            System.out.println("Frame is empty");
             //            throw new EmptyStackException();
             return 0;
         }
@@ -97,18 +95,20 @@ public class RunTimeStack {
                 push((Integer) valueToReturn);
             }
         } catch (EmptyStackException error) {
-//            System.out.println("Frame could not be popped");
+            //            System.out.println("Frame could not be popped");
         }
     }
 
-    public ArrayList peekFrame(){
-        ArrayList<Integer> valuesInFrame = new ArrayList<>();
-        try{
-            for (int i = framePointer.peek(); i < (runTimeStack.size()-1); i++){
-                valuesInFrame.add(runTimeStack.get(i));
-                System.out.println(valuesInFrame.get(i));
+    public String peekFrame() {
+        String valuesInFrame = "";
+        try {
+            for (int i = framePointer.peek(); i <= (runTimeStack.size() - 1); i++) {
+                valuesInFrame = (valuesInFrame + runTimeStack.get(i));
+                if (i != (runTimeStack.size()-1)) {
+                    valuesInFrame = valuesInFrame + ",";
+                }
             }
-        } catch (Exception e){}
+        } catch (Exception e) {}
         return valuesInFrame;
     }
 
@@ -133,7 +133,7 @@ public class RunTimeStack {
         }
         else {
             //            throw new EmptyStackException();
-//            System.out.println("The stack is empty");
+            //            System.out.println("The stack is empty");
             return 0;
         }
     }
@@ -153,7 +153,7 @@ public class RunTimeStack {
         }
         else {
             //            throw new EmptyStackException();
-//            System.out.println("The stack is empty");
+            //            System.out.println("The stack is empty");
             return 0;
         }
     }
@@ -168,13 +168,13 @@ public class RunTimeStack {
         return val;
     }
 
-//    used for debugging purposes
-//    public int size() {
-//        return runTimeStack.size();
-//    }
-//
-//    public int get(int pos) {
-//        return runTimeStack.get(pos);
-//    }
+    //    used for debugging purposes
+    //    public int size() {
+    //        return runTimeStack.size();
+    //    }
+    //
+    //    public int get(int pos) {
+    //        return runTimeStack.get(pos);
+    //    }
 
 }
