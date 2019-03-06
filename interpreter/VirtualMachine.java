@@ -31,7 +31,7 @@ public class VirtualMachine {
             ByteCode code = program.getCode(pc);
 //            System.out.println("About to execute " + pc + " " + code.getClass());
             code.execute(this);
-            if (dumpState) {
+            if (dumpState && !code.getClass().toString().contains("Dump")) {
 //                System.out.println(pc + " " + code.getClass().getSimpleName());
                 System.out.println(code.printBC());
                 runStack.dump();

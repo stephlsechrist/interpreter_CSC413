@@ -17,9 +17,13 @@ public class RunTimeStack {
         framePointer.add(0);
     }
 
-    // recursive iterator do be able to display with commas until frame is reached.
     // stuck on this for a few hours and down to the wire
-    // got help from Thomas Sechrist
+    // i was trying divide the stack using substring at values that
+    // occur in my frame pointer, but the formatting was not happening for me
+    // also, i couldn't figure out a way to do the above and have a dynamic amount
+    // of substrings.
+    // collaborated with Thomas Sechrist
+    // ended up using his algorithm
     public void dump() {
         ArrayList<Integer> clonedStack;
         clonedStack = (ArrayList)runTimeStack.clone();
@@ -54,7 +58,7 @@ public class RunTimeStack {
 
         else {
             // change print statement later
-            System.out.println("The run time stack is empty");
+//            System.out.println("The run time stack is empty");
             //            throw new EmptyStackException();
             return 0;
         }
