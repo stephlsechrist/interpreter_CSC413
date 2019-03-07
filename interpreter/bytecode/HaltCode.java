@@ -1,3 +1,13 @@
+/* ************************************************
+HaltCode.java
+
+Created by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Requests virtual machine to:
+change boolean isRunning in VM to false so that
+execute function in VM stops running
+************************************************* */
 package interpreter.bytecode;
 
 import interpreter.VirtualMachine;

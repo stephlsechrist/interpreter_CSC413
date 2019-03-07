@@ -1,3 +1,14 @@
+/* ************************************************
+LoadCode.java
+
+Created by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Requests virtual machine to:
+perform load RTS as described in runTimeStack.java
+if source code included variable, this is saved in
+instance of LoadCode
+************************************************* */
 package interpreter.bytecode;
 
 import interpreter.VirtualMachine;

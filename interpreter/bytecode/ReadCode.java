@@ -1,10 +1,18 @@
+/* ************************************************
+ReadCode.java
+
+Created by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Asks the user to input an integer and does input
+checking. Keeps asking if user does not enter an integer.
+Then, it requests the VM to push the value to the RTS
+************************************************* */
 package interpreter.bytecode;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import interpreter.VirtualMachine;
-
 import java.util.ArrayList;
 
 public class ReadCode extends ByteCode {

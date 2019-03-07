@@ -1,3 +1,12 @@
+/* ************************************************
+GotoCode.java
+
+Created by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Requests virtual machine to:
+change pc to corresponding label address
+************************************************* */
 package interpreter.bytecode;
 
 import interpreter.VirtualMachine;
@@ -14,6 +23,9 @@ public class GotoCode extends ByteCode {
 
     @Override
     public void execute(VirtualMachine vm){
+        // -1 because want to display LABEL when dumping is turned on
+        // otherwise, it will move on to the next pc after label without
+        // displaying label
         vm.setPC(branchAddr-1);
     }
 
@@ -23,10 +35,6 @@ public class GotoCode extends ByteCode {
 
     public void setBranchAddr(int addr){
         this.branchAddr = addr;
-    }
-
-    public int getBranchAddr(){
-        return this.branchAddr;
     }
 
     @Override

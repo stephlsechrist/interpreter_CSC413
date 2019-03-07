@@ -1,3 +1,17 @@
+/* ************************************************
+CallCode.java
+
+Created by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Requests virtual machine to:
+- get the current address we're executing (pc) and save
+  to VM's returnAddrs stack so we know where to return
+- set the pc to the corresponding label address that was
+  initialized when this BC was instantiated
+- for dumping, we want to display the name of the function
+  label we're jumping to, as well as the arguments being passed
+************************************************* */
 package interpreter.bytecode;
 
 import interpreter.VirtualMachine;
@@ -19,6 +33,9 @@ public class CallCode extends ByteCode {
     @Override
     public void execute(VirtualMachine vm) {
         currAddr = vm.getPC();
+        // -1 because want to display LABEL when dumping is turned on
+        // otherwise, it will move on to the next pc after label without
+        // displaying label
         vm.setPC(branchAddr - 1);
         vm.pushReturnAddrs(currAddr);
         argumentsPassed = vm.peekFrameRunStack();
@@ -36,6 +53,8 @@ public class CallCode extends ByteCode {
         return this.branchAddr;
     }
 
+    // had to format dump output
+    // removed brackets and added parentheses around arguments being passed
     @Override
     public String printBC() {
         formattedLabel = label;

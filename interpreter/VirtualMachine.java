@@ -1,18 +1,48 @@
+/* *************************************************
+VirtualMachine.java
+
+Modified by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Constructor provided
+executeProgram provided in PDF and slightly modified
+   to allow dumping
+
+Virtual Machine has a RTS and byte codes request the
+VM to perform operations on its behalf. In order not to
+break encapsulation, I've added many functions to this
+class that correspond to functions in runTimeStack.java
+so that the BC do not touch the RTS
+
++setIsRunning(boolean state): void
++setDumpState(boolean dumpSwitch): void
++setPC(int pc): void
++getPC(): int
++pushReturnAddrs(int newAddrs): void
++popReturnAddrs(): int
++popRunStack(): int
++peekRunStack(): int
++newFrameRunStack(int offset): void
++popFrameRunStack(): void
++peekFrameRunStack(): String
++storeRunStack(int offset): int
++loadRunStack(int offset): int
++pushRunStack(Integer val): Integer
+************************************************* */
+
 package interpreter;
 
 import interpreter.bytecode.ByteCode;
 import interpreter.RunTimeStack;
 
-import java.util.ArrayList;
-import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class VirtualMachine {
 
-    private RunTimeStack runStack;
-    private Stack returnAddrs;
-    private Program program;
-    private int pc;
+    private RunTimeStack runStack; // our RTS
+    private Stack returnAddrs; // contains address to return to when RETURN called
+    private Program program; // contains all bytecode instructions
+    private int pc; // controls flow of program
     private boolean isRunning; // set false by HALT
     private boolean dumpState; // dump method should be in RunTimeStack
 
@@ -21,29 +51,24 @@ public class VirtualMachine {
     }
 
     public void executeProgram() {
-        // sample base function below
-//        System.out.println("Starting virtual machine");
+        // sample base function below from PDF . added while loop
         pc = 0;
         runStack = new RunTimeStack();
         returnAddrs = new Stack<Integer>();
         isRunning = true;
         dumpState = false;
+        // used to dump runstack state.
         while (isRunning) {
             ByteCode code = program.getCode(pc);
-//            System.out.println("About to execute " + pc + " " + code.getClass());
             code.execute(this);
+            // don't want to display RTS after DUMP is turned on, so needed
+            //   the second half of if statement
             if (dumpState && !code.getClass().toString().contains("Dump")) {
-//                System.out.println(pc + " " + code.getClass().getSimpleName());
                 System.out.println(code.printBC());
+                // call dump() from runTimeStack.java
                 runStack.dump();
-            } // used to dump runstack state.
+            }
             pc++;
-
-//            System.out.println(runStack.size());
-//            for (int i = 0; i < runStack.size(); i++) {
-//                System.out.print(runStack.get(i) + " ");
-//            }
-//            System.out.println();
         }
     }
 

@@ -1,3 +1,9 @@
+/* *************************************************
+CodeTable.java
+
+Provided and not modified at all.
+************************************************* */
+
 /**
  * Code table of byte codes in language X
  * @key name of a specific byte code

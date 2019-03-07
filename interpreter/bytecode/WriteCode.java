@@ -1,3 +1,13 @@
+/* ************************************************
+WriteCode.java
+
+Created by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Requests virtual machine to:
+peek the RTS
+display result to console
+************************************************* */
 package interpreter.bytecode;
 
 import interpreter.VirtualMachine;

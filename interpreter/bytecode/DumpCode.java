@@ -1,3 +1,12 @@
+/* ************************************************
+DumpCode.java
+
+Created by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Requests virtual machine to:
+change the dump boolean to be on so dumping will occur
+************************************************* */
 package interpreter.bytecode;
 
 import interpreter.VirtualMachine;
@@ -20,9 +29,4 @@ public class DumpCode extends ByteCode {
         else
             vm.setDumpState(false);
     }
-
-//    @Override
-//    public String printBC(){
-//        return ("");
-//    }
 }

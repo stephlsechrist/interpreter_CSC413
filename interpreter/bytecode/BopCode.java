@@ -1,3 +1,16 @@
+/* ************************************************
+BopCode.java
+
+Created by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Requests virtual machine to:
+Pop the top two values off the stack and perform
+the given operation with the second value popped as the
+first operand. Push the result to the stack.
+&, |, <, >, <=, >=, ==, != are binary operators
+0 is pushed for false, 1 for true
+************************************************* */
 package interpreter.bytecode;
 
 import interpreter.VirtualMachine;

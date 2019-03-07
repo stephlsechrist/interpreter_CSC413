@@ -1,3 +1,22 @@
+/* ************************************************
+ByteCodeLoader.java
+
+Modified by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Some code provided; I implemented loadCodes
+loadCodes(): Program
+- source code is read line by line with BufferedReader
+- each line is parsed with StringTokenizer
+- for each line of source code, we build an instance
+  of the corresponding byte code. the rest of the line
+  is saved as an ArrayList and passed into the byte code
+  upon calling init function
+- then we load this initialized BC into program ArrayList
+- call resolveAddrs in Program.java and return this completed
+  ArrayList with resolved addresses to calling function
+  Interpreter.java
+************************************************* */
 package interpreter;
 
 import interpreter.bytecode.ByteCode;
@@ -52,33 +71,24 @@ public class ByteCodeLoader extends Object {
                 String currByteCode = CodeTable.getClassName(tokenizer.nextToken());
                 Class c = Class.forName("interpreter.bytecode." + currByteCode);
                 ByteCode bc = (ByteCode) c.getDeclaredConstructor().newInstance();
-//                System.out.println("Created instance of BC from " + currByteCode);
                 int i = 0;
                 while (tokenizer.hasMoreTokens()) {
                     arguments.add(tokenizer.nextToken());
-//                    System.out.println("arg" + i + ": " + arguments.get(i));
-//                    program.add(bc.init(arguments));
-//                    System.out.println(bc + " " + arguments.get(i));
                     i++;
                 }
                 bc.init(arguments);
                 programCode.addCode(bc);
-//                System.out.println("BC just added: " + programCode.getCode(j) + " " + (j+1));
                 arguments.clear();
                 j++;
-//                currLine = this.byteSource.readLine();
             }
         } catch (Exception error) {
             System.out.println("Cannot load current bytecode.");
             return null;
         }
 
-//        System.out.println();
         // want to return programCode with resolved address
         // might need to move this line of code; not sure yet.
-//        System.out.println(programCode.getCode(1));
         programCode.resolveAddrs();
-//        System.out.println("BCL: addresses resolved and about to return programCode\n");
         return programCode;
     }
 }

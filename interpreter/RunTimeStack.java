@@ -1,7 +1,28 @@
+/* *************************************************
+runTimeStack.java
+
+Modified by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+All functions added except constructor
++dump(): void
++peek(): int
++pop(): int
++newFrameAt(int offset): void
++popFrame(): void
++peekFrame(): String
++store(int offset): int
++load(int offset): int
++push(Integer val): Integer
+
+- runTimeStack controlled by VM. not accessible by
+  bytecodes
+- this is where I prevent the BC from doing illegal
+  operations to the RTS
+************************************************* */
+
 package interpreter;
 
-
-import java.lang.reflect.Array;
 import java.util.*;
 import java.lang.String;
 
@@ -45,24 +66,25 @@ public class RunTimeStack {
             System.out.print(holdArray[i].toString());
         }
         System.out.println();
-        //        System.out.println(runTimeStack.toString());
     }
 
+    // peek returns the value at the top of the stack
+    // only allowed if RTS is not empty
+    // if empty, return 0
     public int peek() {
-        //        runTimeStackSize = runTimeStack.size();
         if (!runTimeStack.isEmpty()) {
             return (int) runTimeStack.get(runTimeStack.size() - 1);
         }
 
         else {
-            // change print statement later
-            //            System.out.println("The run time stack is empty");
-            //            throw new EmptyStackException();
             return 0;
         }
-        //        return 0;
     }
 
+    // pop removes the item at the top of the stack and returns it
+    // only allowed if RTS is not empty and the frame at the top
+    //    of the stack is not empty. not allowed to pop past frame boundaries
+    // otherwise, return 0
     public int pop() {
         int value = peek();
         // don't want to pop past frame
@@ -70,20 +92,21 @@ public class RunTimeStack {
             runTimeStack.remove(runTimeStack.size() - 1);
         }
         else {
-            //            System.out.println("Frame is empty");
-            //            throw new EmptyStackException();
             return 0;
         }
         return value;
     }
 
+    // inserts new frame offset from top of stack
+    // always allowed if called
     public void newFrameAt(int offset) {
         framePointer.push(runTimeStack.size() - offset);
     }
 
     // when popping a frame, want to keep the value at the top of the RTS
-    // and return it to calling method
-    // destroy other values on RTS above said frame
+    //    and return it to calling method
+    // destroy other values on RTS above said frame, remove the frame,
+    //    and push the kept value back on the stack
     public void popFrame() {
         try {
             if (runTimeStack.size() > framePointer.peek()) {
@@ -92,13 +115,18 @@ public class RunTimeStack {
                     pop();
                 }
                 framePointer.pop();
-                push((Integer) valueToReturn);
+                push(valueToReturn);
             }
         } catch (EmptyStackException error) {
-            //            System.out.println("Frame could not be popped");
         }
     }
 
+    // peekFrame is used mainly in order to display the CALL byte code correctly
+    //   when dump is on. want to show the arguments being passed into a function
+    //   when CALL is executed. in other words, the values in the top frame on RTS
+    // we are returning a formatted String of the values, including commas
+    // I iterate through RTS starting from the most recent frame pointer and add
+    //   the values to the string we are returning until we reach end of RTS
     public String peekFrame() {
         String valuesInFrame = "";
         try {
@@ -112,52 +140,44 @@ public class RunTimeStack {
         return valuesInFrame;
     }
 
+    // store pops the top value off the RTS and saves it into offset n
+    //   from the start of the frame; returns value stored
+    // only works if the RTS is not empty or the top frame is not empty
+    //   otherwise, return 0
     public int store(int offset) {
-        //        System.out.println("entered store in RTS");
         if (runTimeStack.size() > framePointer.peek()) {
-            //            System.out.println("frame not empty so value to store exists on top of stack");
             int temp = pop();
             int offsetFromFrame = offset + (framePointer.peek());
-            //            System.out.println("Offset is " + offset + " & frame pointer is at " + framePointer.peek());
-            //            System.out.println("we are loading the value at index " + offsetFromFrame);
             // need to check again because altered RTS
             if (runTimeStack.size() > framePointer.peek()) {
-                //                System.out.println("frame not empty so storing at offset");
                 Integer temp1 = runTimeStack.remove(offsetFromFrame);
-                //                System.out.println("removed item : " + temp1.toString());
                 runTimeStack.add(offsetFromFrame, (Integer) temp);
-                //                System.out.println("added item " + runTimeStack.get(offsetFromFrame).toString());
             }
             return temp;
-
         }
         else {
-            //            throw new EmptyStackException();
-            //            System.out.println("The stack is empty");
             return 0;
         }
     }
 
+    // load saves the value that is n offset from start of the frame
+    //   and pushes it onto the RTS; returns value loaded
+    // only works if the RTS is not empty and the offset being requested
+    //   is not greater than the number of items in the top frame
     public int load(int offset) {
-        //        System.out.println("entered load in RTS");
         int offsetFromFrame = offset + (framePointer.peek());
-        //        System.out.println("Offset is " + offset + " & frame pointer is at " + framePointer.peek());
-        //        System.out.println("we are loading the value at index " + offsetFromFrame);
-        if (!runTimeStack.isEmpty()) {
-            //            System.out.println("RTS not empty, so performing load");
+        int frameSize = (runTimeStack.size() - framePointer.peek());
+        if (!runTimeStack.isEmpty() && (offset < frameSize)) {
             int temp = (int) runTimeStack.get(offsetFromFrame);
-            //            System.out.println("value we're loading to top of stack " + temp);
             push((Integer) temp);
-            //            System.out.println("finished with load in RTS; back to VM");
             return temp;
         }
         else {
-            //            throw new EmptyStackException();
-            //            System.out.println("The stack is empty");
             return 0;
         }
     }
 
+    // push pushes a given Integer onto the stack and returns what is pushed
     public Integer push(Integer val) {
         if (runTimeStack.isEmpty()) {
             runTimeStack.add(0, val);
@@ -167,7 +187,6 @@ public class RunTimeStack {
         }
         return val;
     }
-
     //    used for debugging purposes
     //    public int size() {
     //        return runTimeStack.size();

@@ -1,3 +1,12 @@
+/* ************************************************
+PopCode.java
+
+Created by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Requests virtual machine to:
+pop a value off the RTS
+************************************************* */
 package interpreter.bytecode;
 
 import interpreter.VirtualMachine;

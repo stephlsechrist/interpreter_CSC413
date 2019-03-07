@@ -1,3 +1,14 @@
+/* ************************************************
+LitCode.java
+
+Created by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Requests virtual machine to:
+Push a literal value to the top of the RTS
+- if the source code included a variable, this is
+  saved in instance of LitCode
+************************************************* */
 package interpreter.bytecode;
 
 import interpreter.VirtualMachine;

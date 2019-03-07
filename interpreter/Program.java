@@ -1,17 +1,37 @@
+/* *********************************************************
+Program.java
+
+Modified by: Stephanie Sechrist
+Last Edited: March 6, 2019
+
+Added methods:
+#getCode(int pc): ByteCode
++getSize(): int   // not needed
++resolveAddrs()
++addCode(ByteCode newCode)
+
+- Program object is controlled by VirtualMachine.java
+- contains ArrayList of byte codes(program) that holds all
+  of the ByteCode instances initialized in ByteCodeLoader.java
+- resolveAddrs takes the labels of any branches in program
+  (CALL, FALSEBRANCH, GOTO) and finds the labels to branch to
+  - uses a HashMap to load the labels with corresponding address
+  - look for label in HashMap and find corresponding address and
+    save this data to the instance of the branch
+- addCode called by ByteCodeLoader to add an instance of a BC
+  to program
+********************************************************* */
+
 package interpreter;
 
 import interpreter.bytecode.*;
-//import interpreter.bytecode.LabelCode;
 
-//import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 public class Program {
 
     private ArrayList<ByteCode> program;
-    private int pc;
     private HashMap<String, Integer> labels = new HashMap<String, Integer>();
 
     public Program() {
@@ -36,27 +56,16 @@ public class Program {
      */
     public void resolveAddrs() {
         // need ArrayList so we can use init to recreate a ByteCode with proper address?
-//        System.out.println("Entered resolveAddr");
-//        for (int i = 0; i < program.size(); i++){
-//            System.out.println(program.get(i) + " " + program.size());
-//        }
-//        System.out.println("");
 
         for (int i = 0; i < program.size(); i++){
-//            int posToClip = program.get(i).toString().indexOf("@");
-//            String bc = program.get(i).toString().substring(21,posToClip);
             if (program.get(i).getClass().toString().contains("interpreter.bytecode.LabelCode")) {
-//                System.out.println(program.get(i).getClass());
                 LabelCode currBC;// = new LabelCode();
                 String currLabel;
                 // cast abstract ByteCode to more specific LabelCode
                 currBC = (LabelCode) program.get(i);
                 currLabel = currBC.getLabel();
-//                System.out.println((i+1) + ": " + currLabel);
-//                System.out.println(i);
                 // load HashMap
                 labels.put(currLabel, (i));
-//                System.out.println("Added to HashMap: " + labels.get(currLabel) + "\n");
             }
         }
 
@@ -65,43 +74,32 @@ public class Program {
             int branchAddr;
 
             if (program.get(j).toString().contains("FalseBranch")){
-//                System.out.print((j+1) + " FalseBranch ");
                 FalseBranchCode currBC;
                 // cast abstract ByteCode to more specific LabelCode
                 currBC = (FalseBranchCode) program.get(j);
                 currLabel = currBC.getLabel();
-//                System.out.print(currLabel + " ");
                 branchAddr = (int) labels.get(currLabel);
                 currBC.setBranchAddr(branchAddr);
-//                System.out.println(branchAddr + " " + currBC.getBranchAddr());
             }
 
             else if (program.get(j).toString().contains("Goto")){
-//                System.out.print((j+1) + " Goto ");
                 GotoCode currBC;
                 // cast abstract ByteCode to more specific LabelCode
                 currBC = (GotoCode) program.get(j);
                 currLabel = currBC.getLabel();
-//                System.out.print(currLabel + " ");
                 branchAddr = (int) labels.get(currLabel);
                 currBC.setBranchAddr(branchAddr);
-//                System.out.println(branchAddr + " " + currBC.getBranchAddr());
             }
 
             else if (program.get(j).toString().contains("Call")){
-//                System.out.print((j+1) + " Call ");
                 CallCode currBC;
                 // cast abstract ByteCode to more specific LabelCode
                 currBC = (CallCode) program.get(j);
                 currLabel = currBC.getLabel();
-//                System.out.print(currLabel + " ");
                 branchAddr = (int) labels.get(currLabel);
                 currBC.setBranchAddr(branchAddr);
-//                System.out.println(branchAddr + " " + currBC.getBranchAddr());
             }
         }
-
-//        System.out.println("resolveAddr: finished");
     }
 
     public void addCode(ByteCode newCode) {
