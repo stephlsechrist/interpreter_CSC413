@@ -51,7 +51,7 @@ public class VirtualMachine {
     }
 
     public void executeProgram() {
-        // sample base function below from PDF . added while loop
+        // sample base function below from PDF . added if statement for dump
         pc = 0;
         runStack = new RunTimeStack();
         returnAddrs = new Stack<Integer>();
