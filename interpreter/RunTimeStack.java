@@ -49,8 +49,8 @@ public class RunTimeStack {
     public void dump() {
         ArrayList<Integer> clonedStack;
         clonedStack = (ArrayList) runTimeStack.clone();
+        // ArrayList of ArrayLists
         ArrayList holdArray[] = new ArrayList[framePointer.size()];
-
 
         for (int i = framePointer.size(); i > 0; i--) {
             holdArray[i - 1] = new ArrayList<>();

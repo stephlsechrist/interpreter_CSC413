@@ -49,10 +49,6 @@ public class CallCode extends ByteCode {
         this.branchAddr = addr;
     }
 
-    public int getBranchAddr() {
-        return this.branchAddr;
-    }
-
     // had to format dump output
     // removed brackets and added parentheses around arguments being passed
     @Override
