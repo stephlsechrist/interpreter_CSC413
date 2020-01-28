@@ -61,7 +61,7 @@ public class ByteCodeLoader extends Object {
         // try catch block to catch the many errors being encountered during java reflection
         try {
             ArrayList<String> arguments = new ArrayList<>();
-            int j = 0;
+//            int j = 0;
 
 //        while there are lines in file
             while (byteSource.ready()) {
@@ -71,15 +71,15 @@ public class ByteCodeLoader extends Object {
                 String currByteCode = CodeTable.getClassName(tokenizer.nextToken());
                 Class c = Class.forName("interpreter.bytecode." + currByteCode);
                 ByteCode bc = (ByteCode) c.getDeclaredConstructor().newInstance();
-                int i = 0;
+//                int i = 0;
                 while (tokenizer.hasMoreTokens()) {
                     arguments.add(tokenizer.nextToken());
-                    i++;
+//                    i++;
                 }
                 bc.init(arguments);
                 programCode.addCode(bc);
                 arguments.clear();
-                j++;
+//                j++;
             }
         } catch (Exception error) {
             System.out.println("Cannot load current bytecode.");
